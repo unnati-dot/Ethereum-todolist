@@ -1,4 +1,3 @@
-  
 App = {
   loading: false,
   contracts: {},
@@ -50,12 +49,12 @@ App = {
 
   loadContract: async () => {
     // Create a JavaScript version of the smart contract
-    const todoList = await $.getJSON('Todolist.json')
-    App.contracts.Todolist = TruffleContract(todoList)
-    App.contracts.Todolist.setProvider(App.web3Provider)
+    const todoList = await $.getJSON('TodoList.json')
+    App.contracts.TodoList = TruffleContract(todoList)
+    App.contracts.TodoList.setProvider(App.web3Provider)
 
     // Hydrate the smart contract with values from the blockchain
-    App.todoList = await App.contracts.Todolist.deployed()
+    App.todoList = await App.contracts.TodoList.deployed()
   },
 
   render: async () => {
@@ -113,7 +112,7 @@ App = {
   createTask: async () => {
     App.setLoading(true)
     const content = $('#newTask').val()
-    await App.todoList.createTask(content)
+    await App.todoList.createTasks(content)
     window.location.reload()
   },
 
@@ -142,4 +141,4 @@ $(() => {
   $(window).load(() => {
     App.load()
   })
-}
+})
